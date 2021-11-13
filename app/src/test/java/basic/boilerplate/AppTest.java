@@ -18,7 +18,7 @@ public class AppTest {
 
         App classUnderTest = new App(cells);
 
-        classUnderTest.letLifeFoundAWay();
+        classUnderTest.letLifeFoundAWay(false);
 
         assertFalse("cell should be dead without neighbours", cellUnderTest.isAlive);
     }
@@ -35,7 +35,7 @@ public class AppTest {
 
         App classUnderTest = new App(cells);
 
-        classUnderTest.letLifeFoundAWay();
+        classUnderTest.letLifeFoundAWay(false);
 
         assertTrue("cell should be alive with two neighbours", cellUnderTest.isAlive);
     }
@@ -53,7 +53,7 @@ public class AppTest {
 
         App classUnderTest = new App(cells);
 
-        classUnderTest.letLifeFoundAWay();
+        classUnderTest.letLifeFoundAWay(false);
 
         assertTrue("cell should be alive with three neighbours", cellUnderTest.isAlive);
     }
@@ -72,7 +72,7 @@ public class AppTest {
 
         App classUnderTest = new App(cells);
 
-        classUnderTest.letLifeFoundAWay();
+        classUnderTest.letLifeFoundAWay(false);
 
         assertFalse("cell should be dead with four neighbours", cellUnderTest.isAlive);
     }
@@ -91,7 +91,7 @@ public class AppTest {
 
         App classUnderTest = new App(cells);
 
-        classUnderTest.letLifeFoundAWay();
+        classUnderTest.letLifeFoundAWay(false);
 
         assertTrue("cell reborn with 3 alive neighbours", cellUnderTest.isAlive);
     }
@@ -108,7 +108,7 @@ public class AppTest {
 
         App classUnderTest = new App(cells);
 
-        classUnderTest.letLifeFoundAWay();
+        classUnderTest.letLifeFoundAWay(false);
 
         assertFalse("cell don't find adjacent if they are not close enough", cellUnderTest.isAlive);
     }
