@@ -4,14 +4,14 @@ import java.util.Iterator;
 import java.util.Vector;
 
 public class Neighbourhood {
-    private Vector<Cell> neighbourhood;
+    public Vector<Cell> cells;
 
     public Neighbourhood(Vector<Cell> cells) {
-        this.neighbourhood = cells;
+        this.cells = cells;
     }
 
     public void bloom() {
-        Iterator<Cell> cell = neighbourhood.iterator();
+        Iterator<Cell> cell = cells.iterator();
         while (cell.hasNext()) {
             Cell nextCell = cell.next();
             nextCell.deadOrAlive(
@@ -23,7 +23,7 @@ public class Neighbourhood {
     private int getAdjacent(Position focusPosition) {
         int adjacent = 0;
 
-        Iterator<Cell> cell = neighbourhood.iterator();
+        Iterator<Cell> cell = cells.iterator();
         while (cell.hasNext()) {
             if (isAdjacent(focusPosition, cell.next().position)) adjacent++;
         }

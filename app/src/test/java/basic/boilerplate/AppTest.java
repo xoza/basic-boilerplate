@@ -86,7 +86,7 @@ public class AppTest {
         cells.add(new Cell(new Position(1, 0)));
 
         Cell cellUnderTest = new Cell(new Position(0, 0));
-        cellUnderTest.die();
+        cellUnderTest.isAlive = false;
         cells.add(cellUnderTest);
 
         App classUnderTest = new App(cells);
