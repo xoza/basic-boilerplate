@@ -3,12 +3,18 @@
  */
 package basic.boilerplate;
 
+import java.util.Vector;
+
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
+
+    private Neighbourhood neighbourhood;
+
+    public App(Vector<Cell> cells) {
+        this.neighbourhood = new Neighbourhood(cells);
     }
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+    public void letLifeFoundAWay() {
+        neighbourhood.bloom();
     }
+
 }

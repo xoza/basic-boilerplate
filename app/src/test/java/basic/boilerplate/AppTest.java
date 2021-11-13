@@ -4,11 +4,113 @@
 package basic.boilerplate;
 
 import org.junit.Test;
+
+import java.util.Vector;
+
 import static org.junit.Assert.*;
 
 public class AppTest {
-    @Test public void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull("app should have a greeting", classUnderTest.getGreeting());
+    @Test
+    public void cellDiesWithoutNeighbours() {
+        Vector<Cell> cells = new Vector<>();
+        Cell cellUnderTest = new Cell(new Position(0, 0));
+        cells.add(cellUnderTest);
+
+        App classUnderTest = new App(cells);
+
+        classUnderTest.letLifeFoundAWay();
+
+        assertFalse("cell should be dead without neighbours", cellUnderTest.isAlive);
     }
+
+    @Test
+    public void cellLivesWithTwoNeighbours() {
+
+        Vector<Cell> cells = new Vector<>();
+        cells.add(new Cell(new Position(0, 0)));
+        cells.add(new Cell(new Position(0, 1)));
+
+        Cell cellUnderTest = new Cell(new Position(1, 0));
+        cells.add(cellUnderTest);
+
+        App classUnderTest = new App(cells);
+
+        classUnderTest.letLifeFoundAWay();
+
+        assertTrue("cell should be alive with two neighbours", cellUnderTest.isAlive);
+    }
+
+    @Test
+    public void cellLivesWithThreeNeighbours() {
+
+        Vector<Cell> cells = new Vector<>();
+        cells.add(new Cell(new Position(0, 0)));
+        cells.add(new Cell(new Position(0, 1)));
+        cells.add(new Cell(new Position(1, 1)));
+
+        Cell cellUnderTest = new Cell(new Position(1, 0));
+        cells.add(cellUnderTest);
+
+        App classUnderTest = new App(cells);
+
+        classUnderTest.letLifeFoundAWay();
+
+        assertTrue("cell should be alive with three neighbours", cellUnderTest.isAlive);
+    }
+
+    @Test
+    public void cellDiesWithFourNeighbours() {
+
+        Vector<Cell> cells = new Vector<>();
+        cells.add(new Cell(new Position(0, 0)));
+        cells.add(new Cell(new Position(0, 1)));
+        cells.add(new Cell(new Position(0, 2)));
+        cells.add(new Cell(new Position(1, 0)));
+
+        Cell cellUnderTest = new Cell(new Position(1, 1));
+        cells.add(cellUnderTest);
+
+        App classUnderTest = new App(cells);
+
+        classUnderTest.letLifeFoundAWay();
+
+        assertFalse("cell should be dead with four neighbours", cellUnderTest.isAlive);
+    }
+
+    @Test
+    public void cellRebornWithThreeAliveNeighbours() {
+
+        Vector<Cell> cells = new Vector<>();
+        cells.add(new Cell(new Position(0, 1)));
+        cells.add(new Cell(new Position(1, 1)));
+        cells.add(new Cell(new Position(1, 0)));
+
+        Cell cellUnderTest = new Cell(new Position(0, 0));
+        cellUnderTest.die();
+        cells.add(cellUnderTest);
+
+        App classUnderTest = new App(cells);
+
+        classUnderTest.letLifeFoundAWay();
+
+        assertTrue("cell reborn with 3 alive neighbours", cellUnderTest.isAlive);
+    }
+
+    @Test
+    public void cellDontFindAdjacentIfTheyAreNotCloseEnough() {
+
+        Vector<Cell> cells = new Vector<>();
+        cells.add(new Cell(new Position(0, 1)));
+        cells.add(new Cell(new Position(2, 2)));
+
+        Cell cellUnderTest = new Cell(new Position(0, 0));
+        cells.add(cellUnderTest);
+
+        App classUnderTest = new App(cells);
+
+        classUnderTest.letLifeFoundAWay();
+
+        assertFalse("cell don't find adjacent if they are not close enough", cellUnderTest.isAlive);
+    }
+
 }
